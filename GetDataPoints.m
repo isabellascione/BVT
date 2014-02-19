@@ -20,7 +20,7 @@ c=caxis;caxis([0 c(2)]);
 F=griddedInterpolant(lon',lat',grd');
 [x,y]=ginputn;
 box2d=round(F(x,y));
-%clean from  land points
+%clean from land points
 idx=find(box2d >=0);
 x=x(idx);
 y=y(idx);

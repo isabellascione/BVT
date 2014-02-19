@@ -1,4 +1,4 @@
-function FluxesToDraw=DrawFlux(Box,BoxNum,TableOfFluxes)
+function FluxesToDraw=DrawFlux(Box,BoxNum,TableOfFluxes,stemwidth)
 % Draw fluxes related to the box BoxNum from file filename
 % Box                    : Box structure
 % BoxNum                 : Box number
@@ -77,15 +77,15 @@ end
      % direction of the arrow is inverted if flow is negative
      if FluxesToDraw(i,3)>0 
          
-     h(i)=mArrow3(p1,p2,'color','black','stemWidth',0.0007,'tipWidth',0.002);
+     h(i)=mArrow3(p1,p2,'color','black','stemWidth',stemwidth,'tipWidth',stemwidth*3);
      %h=arrow3(p1,p2);
      else
          
-     h(i)=mArrow3(p2,p1,'color','black','stemWidth',0.0007,'tipWidth',0.002);
+     h(i)=mArrow3(p2,p1,'color','black','stemWidth',stemwidth,'tipWidth',stemwidth*3);
      %h=arrow3(p2,p1);
      end
      text_to_write=cat(2,'  ',num2str(abs(round(FluxesToDraw(i,3)))));
-     text(midpoint(1),midpoint(2),midpoint(3),text_to_write,'FontWeight','bold');
+     text(midpoint(1),midpoint(2)+3*stemwidth,midpoint(3),text_to_write,'FontWeight','bold');
      end
 
  

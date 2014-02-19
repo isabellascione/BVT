@@ -184,20 +184,66 @@ for s= 1: cs
     for l=1:nlayers
         Boxnum=Boxnum+1;
         
-        %Selected=PointsMatrix(indices,:);
-        Box(Boxnum+1).pointsX=min(Box(Boxnum+1).XX(1,:,1))+ (max(Box(Boxnum+1).XX(1,:,1))-min(Box(Boxnum+1).XX(1,:,1)))/2;;
-        Box(Boxnum+1).pointsY=min(Box(Boxnum+1).YY(:,1,1))+ (max(Box(Boxnum+1).YY(:,1,1))-min(Box(Boxnum+1).YY(:,1,1)))/2;
-        Box(Boxnum+1).pointsZ=ones(size(Box(Boxnum+1).pointsY));
-        Box(Boxnum+1).pointsZ=Box(Boxnum+1).pointsZ*min(Box(Boxnum+1).LZ(1,1,:))+ (max(Box(Boxnum+1).LZ(1,1,:))-min(Box(Boxnum+1).LZ(1,1,:)))/2;
- end
+%         minx1=nanmin(Box(Boxnum+1).XX(1,:,1));
+%         minx2=nanmin(Box(Boxnum+1).XX(end,:,1));
+%         maxx1=nanmax(Box(Boxnum+1).XX(1,:,1));
+%         maxx2=nanmax(Box(Boxnum+1).XX(end,:,1));
+%         X11=minx1+(maxx1-minx1)/3;
+%         X12=minx1+2*(maxx1-minx1)/3;
+%         X21=minx2+(maxx2-minx2)/3;
+%         X22=minx2+2*(maxx2-minx2)/3;
+%         
+%         
+%         Xm1=minx1+(maxx1-minx1)/2;
+%         Xm2=minx2+(maxx2-minx2)/2;
+%         Xm=(Xm1+Xm2)/2;
+%         
+%         miny1=nanmin(Box(Boxnum+1).YY(:,1,1));
+%         miny2=nanmin(Box(Boxnum+1).YY(:,end,1));
+%         maxy1=nanmax(Box(Boxnum+1).YY(:,1,1));
+%         maxy2=nanmax(Box(Boxnum+1).YY(:,end,1));
+%         Y11=miny1+(maxy1-miny1)/3;
+%         Y12=miny1+2*(maxy1-miny1)/3;
+%         Y21=miny2+(maxy2-miny2)/3;
+%         Y22=miny2+2*(maxy2-miny2)/3;
+%         Ym1=miny1+(maxy1-miny1)/2;
+%         Ym2=miny2+(maxy2-miny2)/2;
+%         Ym=(Ym1+Ym2)/2
+%         cxmin=max(X11,X21);
+%         cxmax=min(X12,X22);
+%         cymin=max(Y11,Y21);
+%         cymax=min(Y12,Y22);
+%         Pts=[Xm cymin
+%         Xm cymax
+%         cxmin Ym
+%         cxmax Ym];
+%         
+%         
+%         Box(Boxnum+1).pointsX=Pts(:,1);
+%         Box(Boxnum+1).pointsY=Pts(:,2);
+%         Box(Boxnum+1).pointsZ=ones(size(Box(Boxnum+1).pointsY));
+%         Box(Boxnum+1).pointsZ=Box(Boxnum+1).pointsZ*min(Box(Boxnum+1).LZ(1,1,:))+ (max(Box(Boxnum+1).LZ(1,1,:))-min(Box(Boxnum+1).LZ(1,1,:)))/2;
+         indices=find(PointsMatrix(:,3)==s);
+         Selected=PointsMatrix(indices,:);
+%          Box(Boxnum+1).pointsX=min(Box(Boxnum+1).XX(1,:,1))+ (max(Box(Boxnum+1).XX(1,:,1))-min(Box(Boxnum+1).XX(1,:,1)))/2;;
+%          Box(Boxnum+1).pointsY=min(Box(Boxnum+1).YY(:,1,1))+ (max(Box(Boxnum+1).YY(:,1,1))-min(Box(Boxnum+1).YY(:,1,1)))/2;
+%          Box(Boxnum+1).pointsZ=ones(size(Box(Boxnum+1).pointsY));
+%          Box(Boxnum+1).pointsZ=Box(Boxnum+1).pointsZ*min(Box(Boxnum+1).LZ(1,1,:))+ (max(Box(Boxnum+1).LZ(1,1,:))-min(Box(Boxnum+1).LZ(1,1,:)))/2;
+  Box(Boxnum+1).pointsY=Selected(:,2);
+ Box(Boxnum+1).pointsX=Selected(:,1);
+ Box(Boxnum+1).pointsZ=ones(size(Box(Boxnum+1).pointsY));
+ Box(Boxnum+1).pointsZ=Box(Boxnum+1).pointsZ*min(Box(Boxnum+1).LZ(1,1,:))+ (max(Box(Boxnum+1).LZ(1,1,:))-min(Box(Boxnum+1).LZ(1,1,:)))/2;
+
+    
+    end
 end
 %box 0 : it is different because it is not divided into vertical layers
 indices=find(PointsMatrix(:,3)==0);
-Selected=PointsMatrix(indices,:);
-Box(1).pointsY=Selected(:,2);
-Box(1).pointsX=Selected(:,1);
-Box(1).pointsZ=ones(size(Box(1).pointsY));
-Box(1).pointsZ=Box(1).pointsZ*min(Box(1).LZ(1,1,:))+ (max(Box(1).LZ(1,1,:))-min(Box(1).LZ(1,1,:)))/2;
+ Selected=PointsMatrix(indices,:);
+ Box(1).pointsY=Selected(:,2);
+ Box(1).pointsX=Selected(:,1);
+ Box(1).pointsZ=ones(size(Box(1).pointsY));
+ Box(1).pointsZ=Box(1).pointsZ*min(Box(1).LZ(1,1,:))+ (max(Box(1).LZ(1,1,:))-min(Box(1).LZ(1,1,:)))/2;
  
 
 
